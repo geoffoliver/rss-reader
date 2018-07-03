@@ -2,7 +2,7 @@
 
 Just playing around to see how hard it would be to make an RSS reader. Turns out, not that hard at all!
 
-<iframe src="https://giphy.com/embed/ToMjGpMhVjTvjX5nLs4" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hero0fwar-television-the-office-thats-what-she-said-ToMjGpMhVjTvjX5nLs4">via GIPHY</a></p>
+![That's what she said](https://media.giphy.com/media/ToMjGpMhVjTvjX5nLs4/giphy.gif)
 
 Wanna try it out? OK.
 
