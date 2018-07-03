@@ -6,9 +6,7 @@ Just playing around to see how hard it would be to make an RSS reader.
 
 Turns out, not that hard at all!
 
-<center>
-  ![That's what she said](https://memegenerator.net/img/instances/250x250/23260590/thats-what-she-said.jpg)
-</center>
+![That's what she said](https://memegenerator.net/img/instances/250x250/23260590/thats-what-she-said.jpg)
 
 Wanna try it out? OK.
 
