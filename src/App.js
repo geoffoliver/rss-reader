@@ -11,7 +11,11 @@ const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
 const feedList = [
   {'name': 'reddit', 'url':'https://www.reddit.com/.rss'},
-  {'name': 'digg', 'url':'http://digg.com/rss/top.rss'}
+  {'name': 'digg', 'url':'http://digg.com/rss/top.rss'},
+  {'name': 'lifehacker', 'url': 'https://lifehacker.com/rss'},
+  {'name': 'boing boing', 'url': 'https://boingboing.net/feed'},
+  {'name': 'kottke', 'url': 'http://feeds.kottke.org/main'},
+  {'name': 'the daily wtf', 'url': 'http://syndication.thedailywtf.com/TheDailyWtf'}
 ];
 
 class App extends Component {
