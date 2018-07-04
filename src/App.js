@@ -24,6 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       feeds: {},
+      feed: "",
       loaded: 0
     };
   }
@@ -68,12 +69,18 @@ class App extends Component {
   render() {
     let items = [];
 
+    const massageFeedItem = (i) => {
+        i.pubDate = new Date(i.pubDate);
+        return i;
+    };
+
     if (!this.state.loading) {
-      for (let feedName in this.state.feeds) {
-        items = items.concat(this.state.feeds[feedName].map((i) => {
-          i.pubDate = new Date(i.pubDate);
-          return i;
-        }));
+      if (this.state.feed) {
+        items = this.state.feeds[this.state.feed].map(massageFeedItem);
+      } else {
+        for (let feedName in this.state.feeds) {
+          items = items.concat(this.state.feeds[feedName].map(massageFeedItem));
+        }
       }
       items.sort((a, b) => {
         return b.pubDate - a.pubDate;
@@ -84,14 +91,20 @@ class App extends Component {
       <div className="App">
         <div style={{ paddingBottom: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <h1 style={{ margin: 0 }}>Feeds</h1>
-          <a
-            title="Refresh"
-            style={{ float: 'right', cursor: 'pointer', fontSize: '2rem' }}
-            onClick={(e) => { this.loadFeeds(); e.preventDefault(); }}
-            id="refreshFeed"
-          >
-            <span role="img" aria-label="Refresh" title="Refresh">🔄</span>
-          </a>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <select onChange={(e) => {this.setState({feed: e.target.value})}}>
+              <option value="">All Feeds</option>
+              {feedList.map((k, i) => <option value={k.name} key={i}>{k.name}</option>)}
+            </select>
+            <a
+              title="Refresh"
+              style={{ float: 'right', cursor: 'pointer', fontSize: '2rem', marginLeft: '1rem' }}
+              onClick={(e) => { this.loadFeeds(); e.preventDefault(); }}
+              id="refreshFeed"
+            >
+              <span role="img" aria-label="Refresh" title="Refresh">🔄</span>
+            </a>
+          </div>
         </div>
         {this.state.loading && <div style={{ padding: '20px', textAlign: 'center' }}>Loading {this.state.loaded} of {feedList.length}...</div>}
         {items.length > 0 && <React.Fragment>
