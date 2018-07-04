@@ -39,6 +39,7 @@ class App extends Component {
 
   loadFeeds = () => {
     this.setState({
+      loading: true,
       loaded: 0
     }, () => {
       feedList.map(this.loadFeed);
@@ -83,7 +84,7 @@ class App extends Component {
         return i;
     };
 
-    if (!this.state.loading) {
+    //if (!this.state.loading) {
       if (this.state.feed) {
         items = this.state.feeds[this.state.feed].map(massageFeedItem);
       } else {
@@ -94,10 +95,11 @@ class App extends Component {
       items.sort((a, b) => {
         return b.pubDate - a.pubDate;
       });
-    }
+    //}
 
     return (
       <div className="App">
+        {this.state.loading && <div className="loading">Loading {this.state.loaded + 1} of {feedList.length}...</div>}
         <div className="header">
           <div className="header-container">
             <h1 style={{ margin: 0 }}>Feeds</h1>
@@ -117,11 +119,10 @@ class App extends Component {
             </div>
           </div>
         </div>
-        {this.state.loading && <div style={{ padding: '20px', textAlign: 'center' }}>Loading {this.state.loaded} of {feedList.length}...</div>}
         {items.length > 0 && <React.Fragment>
           {items.map((item, i) => {
             return <div key={i} className="feed-item">
-              <h2 style={{ margin: 0 }}>
+              <h2 style={{ margin: 0 }} className="feed-title">
                 <a href={item.link} target="_blank">
                   {item.title}
                 </a>
