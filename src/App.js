@@ -47,22 +47,31 @@ class App extends Component {
 
   loadFeed = ({name, url}) => {
     (async () => {
-      let feed = await parser.parseURL(CORS_PROXY + url);
-      let newState = {
-        feeds: this.state.feeds,
-        loaded: (this.state.loaded + 1),
-      };
+      try {
+        let feed = await parser.parseURL(CORS_PROXY + url);
+        let newState = {
+          feeds: this.state.feeds,
+          loaded: (this.state.loaded + 1),
+        };
 
-      newState.feeds[name] = feed.items.map((i) => {
-        i.source = name;
-        return i;
-      });
-
-      this.setState(newState, () => {
-        this.setState({
-          loading: (this.state.loaded !== feedList.length)
+        newState.feeds[name] = feed.items.map((i) => {
+          i.source = name;
+          return i;
         });
-      });
+
+        this.setState(newState, () => {
+          this.setState({
+            loading: (this.state.loaded !== feedList.length)
+          });
+        });
+      }catch(ex) {
+        console.log('error', ex);
+        const loaded = this.state.loaded + 1;
+        this.setState({
+          loaded: loaded,
+          loading: (loaded !== feedList.length)
+        });
+      }
     })();
   }
 
@@ -89,27 +98,29 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div style={{ paddingBottom: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h1 style={{ margin: 0 }}>Feeds</h1>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <select onChange={(e) => {this.setState({feed: e.target.value})}}>
-              <option value="">All Feeds</option>
-              {feedList.map((k, i) => <option value={k.name} key={i}>{k.name}</option>)}
-            </select>
-            <a
-              title="Refresh"
-              style={{ float: 'right', cursor: 'pointer', fontSize: '2rem', marginLeft: '1rem' }}
-              onClick={(e) => { this.loadFeeds(); e.preventDefault(); }}
-              id="refreshFeed"
-            >
-              <span role="img" aria-label="Refresh" title="Refresh">🔄</span>
-            </a>
+        <div className="header">
+          <div className="header-container">
+            <h1 style={{ margin: 0 }}>Feeds</h1>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <select onChange={(e) => {this.setState({feed: e.target.value})}}>
+                <option value="">All Feeds</option>
+                {feedList.map((k, i) => <option value={k.name} key={i}>{k.name}</option>)}
+              </select>
+              <a
+                title="Refresh"
+                style={{ float: 'right', cursor: 'pointer', fontSize: '2rem', marginLeft: '1rem' }}
+                onClick={(e) => { this.loadFeeds(); e.preventDefault(); }}
+                id="refreshFeed"
+              >
+                <span role="img" aria-label="Refresh" title="Refresh">🔄</span>
+              </a>
+            </div>
           </div>
         </div>
         {this.state.loading && <div style={{ padding: '20px', textAlign: 'center' }}>Loading {this.state.loaded} of {feedList.length}...</div>}
         {items.length > 0 && <React.Fragment>
           {items.map((item, i) => {
-            return <div key={i} style={{ padding: '0 0 15px' }}>
+            return <div key={i} className="feed-item">
               <h2 style={{ margin: 0 }}>
                 <a href={item.link} target="_blank">
                   {item.title}
