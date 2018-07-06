@@ -62,6 +62,11 @@ class App extends Component {
           loaded: (this.state.loaded + 1),
         };
 
+        // TODO : pull feed name from feed
+        // TODO : pull list of feeds from local storage or something
+        // TODO : put this up somewhere that people can use it?
+        // console.log('f', feed);
+
         newState.feeds[name] = feed.items.map((i) => {
           i.source = name;
           return i;
