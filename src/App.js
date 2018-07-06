@@ -5,6 +5,8 @@ import "moment-timezone";
 
 import './App.css';
 
+import syncIcon from './sync-light.svg';
+
 const parser = new Parser();
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
@@ -38,6 +40,11 @@ class App extends Component {
   }
 
   loadFeeds = () => {
+    if (this.state.loading) {
+      alert('Please be patient, your feeds are loading.');
+      return;
+    }
+
     this.setState({
       loading: true,
       loaded: 0
@@ -97,12 +104,18 @@ class App extends Component {
       });
     //}
 
+    const getHost = (url) => {
+      const link = document.createElement('a');
+      link.href = url;
+      return link.hostname;
+    };
+
     return (
       <div className="App">
         {this.state.loading && <div className="loading">Loading {this.state.loaded + 1} of {feedList.length}...</div>}
         <div className="header">
           <div className="header-container">
-            <h1 style={{ margin: 0 }}>Feeds</h1>
+            <h1>Feeds</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
               <select value={this.state.feed} onChange={(e) => {this.setState({feed: e.target.value})}}>
                 <option value="">All Feeds</option>
@@ -110,11 +123,12 @@ class App extends Component {
               </select>
               <a
                 title="Refresh"
-                style={{ float: 'right', cursor: 'pointer', fontSize: '2rem', marginLeft: '1rem' }}
+                style={{ float: 'right', cursor: 'pointer', marginLeft: '1rem' }}
                 onClick={(e) => { this.loadFeeds(); e.preventDefault(); }}
                 id="refreshFeed"
               >
-                <span role="img" aria-label="Refresh" title="Refresh">🔄</span>
+                <img src={syncIcon} alt="Refresh" className={this.state.loading ? "loading" : null}/>
+                {/*<span role="img" aria-label="Refresh" title="Refresh">🔄</span>*/}
               </a>
             </div>
           </div>
@@ -128,7 +142,10 @@ class App extends Component {
                 </a>
                 <br />
                 <small>
-                  <a onClick={() => {this.setState({feed: item.source})}}>{item.source}</a> /
+                  <a onClick={() => {this.setState({feed: item.source})}}>{item.source}</a>
+                  {" via "}
+                  {getHost(item.link)}
+                  {" • "}
                   <Moment format="dddd, MMMM Do, YYYY \a\t h:mm A" date={item.pubDate} />
                 </small>
               </h2>

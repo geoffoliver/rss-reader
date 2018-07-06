@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+/* @import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700'); */
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900');
+/* @import url('https://fonts.googleapis.com/css?family=Slabo+27px'); */
 
 * {
   box-sizing: border-box;
@@ -6,33 +8,44 @@
 
 body {
   margin: 0 30px;
-  font-family: 'Crimson Text', Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
 }
 
 hr {
   border: 0;
-  border-top: 1px solid #d6d6d6;
-  margin: 20px 0;
+  border-top: 1px solid #e7e7e7;
+  margin: 0;
 }
 
 a,
 a:visited {
   color: #2a4c96;
   cursor: pointer;
+  text-decoration: none;
 }
 
 a:hover,
 a:active,
 a:focus {
-  color: #0000ff;
+  /* color: #0000ad; */
+  text-decoration: underline;
 }
+
+p {
+  margin-top: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
 
 img {
   max-width: 100%;
   height: auto;
 }
 
-.loading {
+div.loading {
   position: fixed;
   top: 0;
   left: 50%;
@@ -49,9 +62,9 @@ img {
 .header {
   position: sticky;
   top: 0;
-  margin-bottom: 15px;
-  padding: 10px 0;
-  background: #fff;
+  margin: 0 -30px 30px;
+  padding: 10px 30px;
+  background: #f8f8f8;
   z-index: 5;
   border-bottom: 1px solid #d6d6d6;
 }
@@ -63,29 +76,45 @@ img {
   justify-content: space-between;
 }
 
+.header-container h1 {
+  margin: 0;
+  font-family: 'Playfair Display';
+  font-weight: lighter;
+  color: #333;
+}
+
+.header-container img {
+  width: 20px;
+  margin-top: 5px;
+}
+
+.header-container img.loading {
+  opacity: 0.5;
+}
+
 .feed-item {
   overflow-x: auto;
   position: relative;
   z-index: 1;
+  margin-bottom: 30px;
+}
+
+.feed-item hr {
+  margin-top: 30px;
 }
 
 .feed-title {
-  font-weight: 300;
+  font-weight: lighter;
   font-size: 2rem;
   line-height: 2rem;
 }
 
-.feed-title a {
-  text-decoration: none;
-}
-
 .feed-title small {
-  color: #999;
-  font-weight: bold;
   font-size: 0.95rem;
+  opacity: 0.5;
 }
 
 .feed-content {
-  padding: 15px 0 0;
+  padding: 20px 0 0;
   font-size: 1.25rem;
 }
