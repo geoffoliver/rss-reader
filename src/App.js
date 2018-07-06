@@ -133,8 +133,6 @@ class App extends Component {
                 </small>
               </h2>
               <div className="feed-content" dangerouslySetInnerHTML={{ __html: item.content }} />
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}>
-              </div>
               <hr />
             </div>;
           })}
