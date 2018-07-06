@@ -14,8 +14,6 @@ Wanna try it out? OK.
 * Run `npm install`
 * Run `yarn start`
 
-There are two feeds being pulled in -- Digg and Reddit.
-
 Maybe I'll do something more with this later. Maybe not. Probably not.
 
 Uses [rss-parser](https://github.com/bobby-brennan/rss-parser) to parse RSS feeds and [CORS anywhere](https://cors-anywhere.herokuapp.com/) to get around XHR bullshit issues.
