@@ -104,7 +104,7 @@ class App extends Component {
           <div className="header-container">
             <h1 style={{ margin: 0 }}>Feeds</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <select onChange={(e) => {this.setState({feed: e.target.value})}}>
+              <select value={this.state.feed} onChange={(e) => {this.setState({feed: e.target.value})}}>
                 <option value="">All Feeds</option>
                 {feedList.map((k, i) => <option value={k.name} key={i}>{k.name}</option>)}
               </select>
@@ -128,12 +128,12 @@ class App extends Component {
                 </a>
                 <br />
                 <small>
+                  <a onClick={() => {this.setState({feed: item.source})}}>{item.source}</a> /
                   <Moment format="dddd, MMMM Do, YYYY \a\t h:mm A" date={item.pubDate} />
                 </small>
               </h2>
-              <div style={{ padding: '15px 0' }} dangerouslySetInnerHTML={{ __html: item.content }} />
+              <div className="feed-content" dangerouslySetInnerHTML={{ __html: item.content }} />
               <div style={{ fontSize: '0.8rem', color: '#ccc' }}>
-                {item.source}
               </div>
               <hr />
             </div>;

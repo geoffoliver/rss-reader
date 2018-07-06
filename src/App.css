@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0 30px 30px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, 'Times New Roman', Times, serif;
 }
 
 a,
 a:visited {
   color: #2a4c96;
+  cursor: pointer;
 }
 
 a:hover,
@@ -30,15 +37,16 @@ img {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 10;
 }
 
 .header {
   position: sticky;
   top: 0;
-  margin-bottom: 30px;
-  padding: 10px 0;
+  margin-bottom: 15px;
+  padding: 10px 20px;
   background: #fff;
+  z-index: 5;
 }
 
 .header-container {
@@ -48,11 +56,28 @@ img {
   justify-content: space-between;
 }
 
+.content {
+
+}
+
 .feed-item {
-  margin-bottom: 10px;
+  padding: 20px;
   overflow-x: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .feed-title {
   font-weight: 300;
+}
+
+.feed-title small {
+  color: #999;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.feed-content {
+  padding: 15px 0;
+  font-size: 1.25rem;
 }
